@@ -2,6 +2,8 @@ import './styles.css'
 import UserBadge from "../UserBadge";
 import Comment from "../Comment";
 import {useState} from "react";
+import cn from 'classnames';
+import {nanoid} from "nanoid";
 
 const DetailedCard =({
     userName,
@@ -10,7 +12,8 @@ const DetailedCard =({
     imgUrl,
     likes,
     isLikedYourself,
-    comments
+    comments,
+    className
                      }) =>{
     const [isCommentsShow, setIsCommentsShow] = useState(false)
 
@@ -21,14 +24,14 @@ const DetailedCard =({
             return (
                 <>
                     <span className="cnDetailedCardComTitle" onClick={()=> setIsCommentsShow(true)}>{`Показать еще ${comments.length-commentsForRender.length} комментариев...`}</span>
-                    {commentsForRender.map((comment) => <Comment {...comment}/>)}
+                    {commentsForRender.map((comment) => <Comment {...comment} key={nanoid()}/>)}
                 </>
             )
         }
-        return comments.map((comment) => <Comment {...comment}/>)
+        return comments.map((comment) => <Comment {...comment} key={nanoid()}/>)
     }
     return(
-        <div className="cnDetailedCardRoot">
+        <div className={cn ("cnDetailedCardRoot", className)}>
             <div className="cnDetailedCardHeader">
                 <UserBadge nickName={userName} avatarUrl={avatarUrl} id={userId}/>
             </div>
