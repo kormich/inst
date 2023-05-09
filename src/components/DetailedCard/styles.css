@@ -62,16 +62,4 @@
     position: absolute;
     bottom: 5px;
     right: 5px;
-    padding: 5px;
-    background: cadetblue;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.cnDetailedCardSendButton:active{
-    background-color: darkcyan ;
-}
-.cnDetailedCardSendButton:disabled{
-    background-color: darkgray ;
 }

@@ -1,5 +1,7 @@
 import {api} from "../../api";
 import {
+    getAuthorizedUserFailed,
+    getAuthorizedUserStarted,
     getAuthorizedUserSuccess, getUserFailed,
     getUserStarted,
     getUserSuccess
@@ -19,11 +21,11 @@ export const getUser =(id) =>{
 export const getAuthorizedUser =() =>{
     return async (dispatch) =>{
         try{
-            dispatch(getUserStarted())
+            dispatch(getAuthorizedUserStarted())
             const response = await api.users.getUser(1)
             dispatch(getAuthorizedUserSuccess(response.data))
         } catch (error){
-            dispatch(getUserFailed(error))
+            dispatch(getAuthorizedUserFailed(error))
         }
     }
 }

@@ -6,3 +6,7 @@
     max-width: 1080px;
     margin: auto;
 }
+.cnNavbarLink{
+    text-decoration: none;
+    color: darkslategray;
+}

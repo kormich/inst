@@ -4,6 +4,7 @@ import Comment from "../Comment";
 import {useState} from "react";
 import cn from 'classnames';
 import {nanoid} from "nanoid";
+import Button from "../Button";
 
 const DetailedCard =({
     userName,
@@ -61,7 +62,7 @@ const DetailedCard =({
             </div>
             <div className='cnDetailedCardTextAreaWrapper'>
                 <textarea value={comment} onChange={e =>setComment(e.target.value)} placeholder='Введите комментарий' className='cnDetailedCardTextArea'/>
-                <button disabled={mutateLoading} className='cnDetailedCardSendButton' onClick={handleSendCommentClick}>Отправить</button>
+                <Button disabled={mutateLoading} className='cnDetailedCardSendButton' onClick={handleSendCommentClick}>Отправить</Button>
             </div>
         </div>
     )
