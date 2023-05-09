@@ -7,3 +7,11 @@ export const getPhotos = (config) => makeRequest({
     url: URL,
     ...config,
 });
+
+export const mutatePhoto = (config) =>{
+    config.url = `${URL}${config.url}`;
+    return makeRequest({
+        method: 'PUT',
+        ...config
+    })
+}

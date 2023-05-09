@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import DetailedCard from "../../components/DetailedCard";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {getPhotos} from "../../redux/actions/photos";
+import {getPhotos, mutatePhoto} from "../../redux/actions/photos";
 import InfiniteScroll from "react-infinite-scroll-component";
 import './styles.css'
 import {Bars} from "react-loader-spinner";
@@ -10,18 +10,21 @@ import {Bars} from "react-loader-spinner";
 const MainPage = () => {
     const photos = useSelector(state =>state.photos.photos)
     const loading = useSelector(state =>state.photos.isPhotoLoading)
+    const authorizedUser =useSelector(state => state.users.authorizedUser)
     const total = useSelector(state =>state.photos.totalPhotos)
     const dispatch = useDispatch()
 
     const[page, setPage] = useState(1);
+    useEffect(() => {dispatch(getPhotos(page))}, [page]);
     const nextHandler =() =>{
         setPage(page+1)
     }
-
-    useEffect(() => {dispatch(getPhotos(page))}, [page]);
+    const onLikeClick =(photoId) =>{
+        dispatch(mutatePhoto(authorizedUser.id, photoId))
+    }
 
     return (
-        <Layout nickName={"Artem"} id={1}>
+        <Layout nickName={authorizedUser.nickname} id={authorizedUser.id} avatarUrl={authorizedUser.avatarUrl}>
             <div className = "cnMainPageRoot">
                 {loading ? (<div className="cnMainLoaderContainer">
                         <Bars color="#009999" height={80} width={80}/>
@@ -38,14 +41,16 @@ const MainPage = () => {
                         { photos.map(({author, imgUrl, id, likes, comments}) =>(
                              <DetailedCard
                                 key ={id}
+                                id ={id}
                                 userName={author.nickname}
                                 userId={author.id}
                                 avatarUrl={author.avatarUrl}
                                 imgUrl={imgUrl}
                                 likes={likes.length}
-                                isLikedYourself={true}
+                                isLikedYourself={likes.includes(authorizedUser.id)}
                                 comments={comments}
                                 className ="cnMainPageCard"
+                                onLikeClick={onLikeClick}
                              />
                         ))}
                 </InfiniteScroll>}

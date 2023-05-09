@@ -13,7 +13,9 @@ const DetailedCard =({
     likes,
     isLikedYourself,
     comments,
-    className
+    className,
+    onLikeClick,
+    id
                      }) =>{
     const [isCommentsShow, setIsCommentsShow] = useState(false)
 
@@ -39,7 +41,7 @@ const DetailedCard =({
                 <img src={imgUrl} alt="img" className="cnDetailedCardImg"/>
             </div>
             <div className="cnDetailedCardButtons">
-                <i className={`${isLikedYourself ? 'fas' : 'far'} fa-heart cnDetailedCardButtonsLike`}/>
+                <i onClick={()=>onLikeClick(id)} className={`${isLikedYourself ? 'fas' : 'far'} fa-heart cnDetailedCardButtonsLike`}/>
                 <i className= "far fa-comment cnDetailedCardButtonsComment"/>
             </div>
             <div className="cnDetailedCardLikes ">
