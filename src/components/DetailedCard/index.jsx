@@ -15,9 +15,18 @@ const DetailedCard =({
     comments,
     className,
     onLikeClick,
-    id
+    id,
+    onCommentSendClick,
+    mutateLoading
                      }) =>{
     const [isCommentsShow, setIsCommentsShow] = useState(false)
+    const [comment, setComment] = useState('')
+    const handleSendCommentClick = () =>{
+        if(comment){
+            onCommentSendClick(id, comment)
+            setComment('')
+        }
+    }
 
     const renderComments = () =>{
         if (comments.length >2 && !isCommentsShow){
@@ -50,7 +59,10 @@ const DetailedCard =({
             <div className="cnDetailedCardComments">
                 {renderComments()}
             </div>
-            <textarea className="cnDetailedCardTextArea"/>
+            <div className='cnDetailedCardTextAreaWrapper'>
+                <textarea value={comment} onChange={e =>setComment(e.target.value)} placeholder='Введите комментарий' className='cnDetailedCardTextArea'/>
+                <button disabled={mutateLoading} className='cnDetailedCardSendButton' onClick={handleSendCommentClick}>Отправить</button>
+            </div>
         </div>
     )
 }
