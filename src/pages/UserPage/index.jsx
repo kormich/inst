@@ -3,8 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import './styles.css'
 import UserBio from "../../components/UserBio";
 import Card from "../../components/Card";
-import {toggleLike} from "../../redux/actions/photos";
-import {getPostsByUser, toggleLikeOnPost} from "../../redux/actions/postsByUser";
+import {getPostsByUser, sendCommentOnUserPage, toggleLikeOnPost} from "../../redux/actions/postsByUser";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -17,6 +16,7 @@ const UserPage = () => {
     const posts = useSelector(state => state.postsByUser.posts);
     const isPostsLoading = useSelector(state => state.postsByUser.isPostsLoading);
     const isUserLoading = useSelector(state => state.users.isUserLoading);
+    const mutateLoading = useSelector(state =>state.photos.isMutateLoading)
     const dispatch = useDispatch()
     const { id } = useParams();
     const [postsForRender, setPostsForRender] = useState([]);
@@ -37,6 +37,11 @@ const UserPage = () => {
     const onLikeClick = (photoId)=>{
         dispatch(toggleLikeOnPost(authorizedUser.id, photoId, id))
     }
+
+    const onCommentSendClick = (photoId, comment) =>{
+        dispatch(sendCommentOnUserPage(authorizedUser.nickname, photoId, user.id, comment))
+    }
+
     const nextHandler = () => {
         const newPosts = [...posts];
         const offset = 12 * (page + 1);
@@ -81,9 +86,16 @@ const UserPage = () => {
                                 imgUrl={imgUrl}
                                 className="cnUserPageCard"
                                 likes={likes.length}
-                                comments={comments.length}
+                                comments={comments}
                                 isLikedByYou={likes.includes(authorizedUser.id)}
                                 onLikeClick={() => onLikeClick(id)}
+                                userData={{
+                                    userName:user.nickname,
+                                    avatarUrl:user.avatarUrl,
+                                    userId:user.id
+                                }}
+                                onCommentSubmit={(comment) => onCommentSendClick(id, comment)}
+                                isMutateLoading={mutateLoading}
                             />)}
                     </InfiniteScroll>  : <p className="cnUserPageNoPosts">User dont have posts!</p>}
                 </div>

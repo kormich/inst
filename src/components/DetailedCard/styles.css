@@ -33,33 +33,16 @@
     flex-direction: column;
     padding: 0 10px 10px 10px;
 }
-.cnDetailedCardTextArea{
-    box-sizing: border-box;
-    border: none;
-    background-color: white;
-    padding: 10px;
-    outline:  none;
-    resize: none;
-    width: 85%;
-}
-.cnDetailedCardButtonsLike{
+
+.cnDetailedCardLikeIcon {
     margin-right: 10px;
     cursor: pointer;
 }
-.cnDetailedCardButtonsComment{
+.cnDetailedCardLikeComment {
     cursor: pointer;
 }
 .cnDetailedCardComTitle{
     font-size: 14px;
     cursor: pointer;
     color: rgba(0,0,0,0.45);
-}
-.cnDetailedCardTextAreaWrapper{
-    position:relative ;
-    background: white;
-}
-.cnDetailedCardSendButton{
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
 }
