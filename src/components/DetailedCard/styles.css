@@ -19,6 +19,7 @@
     margin: 0 60px 0 60px;
     box-shadow: 0 0 20px 10px rgba(0,0,0, .2) ;
 }
+
 .cnDetailedCardButtons{
     display: flex;
     padding: 10px;
@@ -46,3 +47,4 @@
     cursor: pointer;
     color: rgba(0,0,0,0.45);
 }
+

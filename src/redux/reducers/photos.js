@@ -10,7 +10,8 @@ const initialSate ={
     photos: [],
     isPhotoLoading: true,
     totalPhotos:0,
-    isMutateLoading:false
+    isMutateLoading:false,
+    isPhotoError: false
 }
 
 export const photosReduser = (state = initialSate, action)=>{
@@ -23,13 +24,15 @@ export const photosReduser = (state = initialSate, action)=>{
         case GET_PHOTOS_FAILED:
             return {
                 ...state,
-                isPhotoLoading: false
+                isPhotoLoading: false,
+                isPhotoError: true
             }
         case GET_PHOTOS_SUCCESS:
             return {
                 ...state,
                 photos: action.payload,
-                isPhotoLoading: false
+                isPhotoLoading: false,
+                isPhotoError: false
             }
         case SET_PHOTOS_TOTAL:
             return {

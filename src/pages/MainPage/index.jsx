@@ -9,7 +9,8 @@ import {Bars} from "react-loader-spinner";
 
 const MainPage = () => {
     const photos = useSelector(state =>state.photos.photos)
-    const loading = useSelector(state =>state.photos.isPhotoLoading)
+    const isLoading = useSelector(state =>state.photos.isPhotoLoading)
+    const isError = useSelector(state =>state.photos.isPhotoError)
     const authorizedUser =useSelector(state => state.users.authorizedUser)
     const total = useSelector(state =>state.photos.totalPhotos)
     const mutateLoading = useSelector(state =>state.photos.isMutateLoading)
@@ -29,20 +30,21 @@ const MainPage = () => {
 
     return (
         <Layout nickName={authorizedUser.nickname} id={authorizedUser.id} avatarUrl={authorizedUser.avatarUrl}>
-            <div className = "cnMainPageRoot">
-                <InfiniteScroll
+            <div className="cnMainPageRoot">
+                {isLoading && <Bars color="#33CCCC" height={15} width={15} />}
+                {!isError && !isLoading && <InfiniteScroll
                     dataLength={photos.length}
-                    next = {nextHandler}
+                    next={nextHandler}
                     hasMore={photos.length < total}
-                    loader = {<div className="cnMainLoaderContainer">
+                    loader={<div className="cnMainLoaderContainer">
                         <Bars color="#33CCCC" height={15} width={15}/>
                     </div>}
                     endMessage={<p className="cnMainLoaderContainer"> Thats all</p>}
                 >
-                    { photos.map(({author, imgUrl, id, likes, comments}) =>(
+                    {photos.map(({author, imgUrl, id, likes, comments}) => (
                         <DetailedCard
-                            key ={id}
-                            id ={id}
+                            key={id}
+                            id={id}
                             userName={author.nickname}
                             userId={author.id}
                             avatarUrl={author.avatarUrl}
@@ -50,13 +52,13 @@ const MainPage = () => {
                             likes={likes.length}
                             isLikedYourself={likes.includes(authorizedUser.id)}
                             comments={comments}
-                            className ="cnMainPageCard"
+                            className="cnMainPageCard"
                             onLikeClick={onLikeClick}
                             onCommentSendClick={onCommentSendClick}
                             mutateLoading={mutateLoading}
                         />
                     ))}
-                </InfiniteScroll>
+                </InfiniteScroll>}
             </div>
         </Layout>
     )

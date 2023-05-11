@@ -2,6 +2,7 @@ import './styles.css'
 import cn from "classnames";
 import PhotoModal from "../PhotoModal";
 import {useState} from "react";
+import ImageWithLoader from "../ImageWithLoader";
 
 const Card = ({ imgUrl, className, likes, comments, isLikedByYou, onLikeClick, onCommentSubmit,  id, userData, isMutateLoading}) => {
     const [isModalVisible, setModalVisible] = useState(false)
@@ -9,7 +10,7 @@ const Card = ({ imgUrl, className, likes, comments, isLikedByYou, onLikeClick, o
 
     return(
         <div className={cn("cnCardRoot", className)}>
-            <img src={imgUrl} alt={imgUrl} className="cnCardImage"/>
+            <ImageWithLoader className="cnCardImage" src={imgUrl} alt={imgUrl}/>
             <div className='cnCardHover'/>
             <div className='cnCardIcons'>
                 <i className={cn(`${isLikedByYou ? 'fas' : 'far'} fa-heart`, 'cnCardIcon')} onClick={onLikeClick}/>

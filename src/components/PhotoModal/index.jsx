@@ -5,6 +5,7 @@ import './styles.css'
 import {useEffect} from "react";
 import Comment from "../Comment";
 import TextArea from "../TextArea";
+import ImageWithLoader from "../ImageWithLoader";
 
 const PhotoModal = ({
                         commentValue,
@@ -40,7 +41,7 @@ const PhotoModal = ({
         >
             <div className="cnModalRoot">
                 <div className="cnModalImgWrapper">
-                    <img src={imgUrl} alt={imgUrl} className="cnModalImg"/>
+                    <ImageWithLoader src={imgUrl} alt={imgUrl} className="cnModalImg"/>
                 </div>
                 <div className="cnModalCommentsBlock">
                     <div>

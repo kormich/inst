@@ -11,7 +11,9 @@ const initialState ={
     user:{},
     isUserLoading: true,
     authorizedUser: undefined,
-    isAuthorizedUserLoading: true
+    isAuthorizedUserLoading: true,
+    isAuthorizedError: false,
+    isUserError: false
 }
 
 export const usersReducer = (state = initialState, action)=>{
@@ -24,19 +26,22 @@ export const usersReducer = (state = initialState, action)=>{
         case GET_USER_FAILED:
             return {
                 ...state,
-                isUserLoading: false
+                isUserLoading: false,
+                isUserError: true
             }
         case GET_USER_SUCCESS:
             return {
                 ...state,
                 user: action.payload,
-                isUserLoading: false
+                isUserLoading: false,
+                isUserError: false
             }
         case GET_AUTHORIZED_USER_SUCCESS:
             return {
                 ...state,
                 authorizedUser: action.payload,
-                isAuthorizedUserLoading: false
+                isAuthorizedUserLoading: false,
+                isAuthorizedError: false
             }
         case GET_AUTHORIZED_USER_STARTED:
             return {
@@ -48,6 +53,7 @@ export const usersReducer = (state = initialState, action)=>{
             return {
                 ...state,
                 isAuthorizedUserLoading: false,
+                isAuthorizedError: true
             };
         default:
             return {...state}
