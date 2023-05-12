@@ -4,7 +4,7 @@ import {
     getAuthorizedUserStarted,
     getAuthorizedUserSuccess, getUserFailed,
     getUserStarted,
-    getUserSuccess
+    getUserSuccess, mutateUserStarted, mutateUserSuccess
 } from "../actionCreators/users";
 
 export const getUser =(id) =>{
@@ -29,3 +29,22 @@ export const getAuthorizedUser =() =>{
         }
     }
 }
+export const mutateUser = (data, userId) => {
+    return async (dispatch, getState) => {
+        dispatch(mutateUserStarted());
+        const state = getState();
+
+        const newUser = { ...state.users.user, ...data };
+
+        try {
+            const response = await api.users.mutateUser({
+                data: newUser,
+                url: `/${userId}`,
+            });
+
+            dispatch(getUserSuccess(response.data));
+        } finally {
+            dispatch(mutateUserSuccess());
+        }
+    };
+};

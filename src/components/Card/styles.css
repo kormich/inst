@@ -14,9 +14,12 @@
 .cnCardImage{
     width: 300px;
     height: 300px;
+}
+.cnCardImage img{
     object-fit: cover;
     border-radius: 10px;
 }
+
 .cnCardHover{
     position: absolute;
     top: 0;
@@ -26,6 +29,7 @@
     display: none;
     background-color: black;
     opacity: .4;
+    border-radius: 10px;
 }
 .cnCardIcons{
     top: 0;
