@@ -9,7 +9,7 @@ const Navbar = ({
     return(
         <div className="cnNavbarRoot">
             <div className="cnNavbarWrapper">
-                <a href='/' className='cnNavbarLink'>Rugram</a>
+                <a href='/' className='cnNavbarLink'>TumGram</a>
                 <UserBadge nickName={nickName} avatarUrl={avatarUrl} id={id} />
             </div>
         </div>

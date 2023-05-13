@@ -27,13 +27,20 @@
     justify-content: center;
     align-items: center;
     background: white;
-    min-height: 800px;
+    min-height: 500px;
     min-width: 500px;
+    max-height: 700px;
+    max-width: 1024px;
+    overflow: hidden;
 }
+
+
 .cnModalImg {
     max-width: 1024px;
     max-height: 1024px;
 }
+
+
 .cnModalCommentsBlock {
     display: flex;
     width: 400px;
@@ -48,7 +55,7 @@
     border-bottom: 1px solid #dbdbdb;
 }
 .cnModalComments {
-    max-height: 1024px;
+    max-height: 800px;
     padding: 10px;
 }
 .cnModalIcons{

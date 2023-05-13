@@ -65,6 +65,7 @@ const UserPage = () => {
                 {!isUserError && <UserBio
                     avatarUrl={user.avatarUrl}
                     nickname={user.nickname}
+                    postsCount={posts.length}
                     subscribed={user.subscribed.length}
                     subscribers={user.subscribers.length}
                     firstName={user.firstName}

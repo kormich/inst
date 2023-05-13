@@ -43,6 +43,7 @@ const validateUrl = (text, cb) => {
 const UserBio = ({
                      avatarUrl,
                      nickname,
+                     postsCount,
                      subscribed,
                      subscribers,
                      firstName,
@@ -93,7 +94,7 @@ const UserBio = ({
         });
         setIsEditMode(false);
 
-    }, [formUserName, formFirstName, formLastName, formUrl, formDescription]);
+    },  [formUserName, formFirstName, formLastName, formUrl, formDescription]);
 
     useEffect(() => {
         if (isMyPage) {
@@ -146,7 +147,7 @@ const UserBio = ({
                     <Button {...btnProps}/>
                 </div>
                 <div className='cnUserBioRow'>
-                    <UserCounter count={3} text="Публикаций" className="cnUserBioCounter"/>
+                    <UserCounter count={postsCount} text="Публикаций" className="cnUserBioCounter"/>
                     <UserCounter count={subscribers} text="Подписчиков" className="cnUserBioCounter"/>
                     <UserCounter count={subscribed} text="Подписок"/>
                 </div>

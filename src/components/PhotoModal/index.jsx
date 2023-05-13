@@ -43,7 +43,7 @@ const PhotoModal = ({
                 <div className="cnModalImgWrapper">
                     <ImageWithLoader src={imgUrl} alt={imgUrl} className="cnModalImg"/>
                 </div>
-                <div className="cnModalCommentsBlock">
+                  <div className="cnModalCommentsBlock">
                     <div>
                         <div className="cnModalHeader">
                             <UserBadge nickName={userName} avatarUrl={avatarUrl} id={userId} />
