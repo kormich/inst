@@ -10,6 +10,7 @@
 .cnTextAreaWrapper{
     position:relative ;
     background: white;
+    border-radius: 7px;
 }
 .cnSendButton{
     position: absolute;

@@ -50,7 +50,6 @@ export const photosReduser = (state = initialSate, action)=>{
                 isMutateLoading: false
             }
         case MUTATE_PHOTO_FAILED:
-            //TODO ADD errors
             return {
                 ...state,
                 isMutateLoading: false

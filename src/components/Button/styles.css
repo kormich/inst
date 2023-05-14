@@ -1,13 +1,13 @@
 .cnButton{
     padding: 5px;
-    background: cadetblue;
+    background: #2373ad;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 .cnButton:active{
-    background-color: darkcyan ;
+    background-color: #ab3d95    ;
 }
 .cnButton:disabled{
     background-color: darkgray ;

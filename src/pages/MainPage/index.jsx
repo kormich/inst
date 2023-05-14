@@ -39,7 +39,6 @@ const MainPage = () => {
                     loader={<div className="cnMainLoaderContainer">
                         <Bars color="#33CCCC" height={15} width={15}/>
                     </div>}
-                    endMessage={<p className="cnMainLoaderContainer"> Thats all</p>}
                 >
                     {photos.map(({author, imgUrl, id, likes, comments}) => (
                         <DetailedCard

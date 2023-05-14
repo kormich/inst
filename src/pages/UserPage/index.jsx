@@ -57,6 +57,23 @@ const UserPage = () => {
         await dispatch(mutateUser(data, user.id));
     };
 
+    const onChangeSubscribers = (isSubscribe) => {
+        const subscribers = user.subscribers;
+        if (isSubscribe) {
+            const newSubscribers = subscribers.filter((subscriber) => subscriber !== authorizedUser.id);
+            dispatch(mutateUser({
+                ...user,
+                subscribers: newSubscribers
+            }, user.id));
+        } else {
+            subscribers.push(authorizedUser.id);
+            dispatch(mutateUser({
+                ...user,
+                subscribers
+            }, user.id));
+        }
+    };
+
     return (
         <Layout nickName={authorizedUser.nickname} id={authorizedUser.id} avatarUrl={authorizedUser.avatarUrl}>
             {isPostsLoading || isUserLoading ? <div className="cnMainLoaderContainer">
@@ -75,6 +92,7 @@ const UserPage = () => {
                     isMyPage={id == authorizedUser.id}
                     isSubscribed={user.subscribers.includes(authorizedUser.id)}
                     onEdit={onEdit}
+                    onChangeSubscribers={onChangeSubscribers}
                     fromLoading={isUserMutateLoading}
                 />}
                 <div className="cnUserPageRootContent">
@@ -85,9 +103,6 @@ const UserPage = () => {
                         loader={<div className="cnMainLoaderContainer">
                             <Bars color="#000BFF" height={15} width={15} />
                         </div>}
-                        endMessage={
-                            <p className="cnMainLoaderContainer">Thats all!</p>
-                        }
                         className="cnUserPageScrool"
                     >
                         {postsForRender.map(({ comments, likes, imgUrl, id })=>

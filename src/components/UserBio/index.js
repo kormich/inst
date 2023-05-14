@@ -7,6 +7,7 @@ import FormTextArea from "../FormTextArea";
 
 const requiredText = 'Поле обязательно!';
 
+
 const validateText = (text, cb) => {
     if (!text) {
         cb(requiredText);
@@ -53,6 +54,7 @@ const UserBio = ({
                      isMyPage,
                      isSubscribed,
                      onEdit,
+                     onChangeSubscribers,
                      fromLoading
 }) =>{
     const [btnProps, setBtnProps] = useState({ onClick: () => false, children: 'Подписаться' });
@@ -104,11 +106,11 @@ const UserBio = ({
                 setBtnProps({ onClick: () => setIsEditMode(true), children: 'Редактировать' });
             }
         } else if (isSubscribed) {
-            setBtnProps({ onClick: () => false, children: 'Отписаться' })
+            setBtnProps({ onClick: () => onChangeSubscribers(true), children: 'Отписаться' })
         } else {
-            setBtnProps({ onClick: () => false, children: 'Подписаться' })
+            setBtnProps({ onClick: () => onChangeSubscribers(false), children: 'Подписаться'})
         }
-    }, [isMyPage, isSubscribed, isEditMode, fromLoading, onSaveEditForm]);
+    }, [isMyPage, isSubscribed, isEditMode, fromLoading, onSaveEditForm, setBtnProps]);
 
     const fields = useMemo(() => {
         if (isEditMode) {
