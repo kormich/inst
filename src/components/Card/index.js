@@ -8,6 +8,13 @@ const Card = ({ imgUrl, className, likes, comments, isLikedByYou, onLikeClick, o
     const [isModalVisible, setModalVisible] = useState(false)
     const [comment,setComment] = useState('')
 
+    const handleSendCommentClick = () =>{
+        if(comment){
+            onCommentSubmit(comment)
+            setComment('')
+        }
+    }
+
     return(
         <div className={cn("cnCardRoot", className)}>
             <ImageWithLoader className="cnCardImage" src={imgUrl} alt={imgUrl}/>
@@ -25,7 +32,7 @@ const Card = ({ imgUrl, className, likes, comments, isLikedByYou, onLikeClick, o
                 {...userData}
                 commentValue={comment}
                 setCommentValue={setComment}
-                onCommentSubmit = {() => onCommentSubmit(comment)}
+                onCommentSubmit = {handleSendCommentClick}
                 isCommentLoading={isMutateLoading}
                 imgUrl={imgUrl}
                 isLikedByYou={isLikedByYou}

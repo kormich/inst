@@ -9,18 +9,44 @@ const requiredText = 'Поле обязательно!';
 
 
 const validateText = (text, cb) => {
+
     if (!text) {
         cb(requiredText);
         return true;
     }
 
-    if (text < 3) {
+    if (text.length < 3) {
         cb('Слишком короткий текст!')
         return true;
     }
 
+    if (text.length > 20) {
+        cb('Слишком длинный текст!')
+        return true;
+    }
+
     if (/\s/g.test(text)) {
-        cb('Не должно быть проблеов!')
+        cb('Не должно быть пробелов!')
+        return true;
+    }
+
+    return false;
+};
+
+const validateTextDescription = (text, cb) => {
+
+    if (!text) {
+        cb(requiredText);
+        return true;
+    }
+
+    if (text.length < 3) {
+        cb('Слишком короткий текст!')
+        return true;
+    }
+
+    if (text.length > 50) {
+        cb('Слишком длинный текст!')
         return true;
     }
 
@@ -71,18 +97,19 @@ const UserBio = ({
     const [urlError, setUrlErrorError] = useState('');
 
     const onSaveEditForm = useCallback(async () => {
+        setUserNameError('')
+        setFirstNameError('')
+        setLastNameErrorError('')
+        setUrlErrorError('')
+        setDescriptionErrorError('')
         const isUserNameError = validateText(formUserName, setUserNameError);
         const isFirstNameError = validateText(formFirstName, setFirstNameError);
         const isLastNameError = validateText(formLastName, setLastNameErrorError);
         const isUrlError = validateUrl(formUrl, setUrlErrorError);
+        const isDescriptionError = validateTextDescription(formDescription,setDescriptionErrorError)
 
-        let isErrors = isUserNameError || isFirstNameError || isLastNameError || isUrlError;
+        let isErrors = isUserNameError || isFirstNameError || isLastNameError || isUrlError || isDescriptionError;
 
-        console.log(formDescription);
-        if (!formDescription) {
-            isErrors = true;
-            setDescriptionErrorError(requiredText);
-        }
         if (isErrors) {
             return;
         }
@@ -119,7 +146,7 @@ const UserBio = ({
                 name: (
                     <>
                         <Input value={formFirstName} onChange={({ target: { value } }) => setFormFirstName(value)} className="cnInput" errorText={firstNameError} />
-                        <Input onChange={({ target: { value } }) => setFormLastName(value)} value={formLastName} className="cnInput" errorText={lastNameError} />
+                        <Input value={formLastName} onChange={({ target: { value } }) => setFormLastName(value)} className="cnInput" errorText={lastNameError} />
                     </>
                 ),
                 description: <FormTextArea value={formDescription} onChange={({ target: { value } }) => setFormDescription(value)} className="cnInput" errorText={descriptionError} />,

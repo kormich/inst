@@ -7,6 +7,7 @@
     outline: none;
     border-radius: 5px;
     border: 1px solid lightblue;
+    width: 210px;
 }
 
 .cnInputError {
@@ -14,6 +15,7 @@
     bottom: -19px;
     left: 0;
     color: tomato;
+    width: 220px;
 }
 
 .cnInputWithError {
